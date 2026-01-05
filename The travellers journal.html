@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Pax Dei Traveler's Journal</title>
+
+<style>
+body {
+    background:#1a1a1a;
+    margin:0;
+    font-family: "Garamond", "Georgia", serif;
+}
+
+/* BOOK CONTAINER */
+#book {
+    width: 1000px;
+    height: 720px; /* taller so more text fits */
+    margin: 30px auto;
+    background: #ead8b1;
+    border: 10px solid #3a2d17;
+    box-shadow: 0 0 40px #000;
+    padding: 25px 35px;
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden; /* hide edges during flip */
+}
+
+h1, h2 {
+    text-align:center;
+    letter-spacing:2px;
+    margin: 0;
+}
+
+h1 {
+    font-size: 30px;
+}
+h2 {
+    font-size: 18px;
+    margin-top: 4px;
+}
+
+button {
+    background:#3a2d17;
+    color:#fff;
+    border:none;
+    padding:7px 11px;
+    margin:2px;
+    cursor:pointer;
+    font-family:inherit;
+    font-size:13px;
+}
+button:hover {
+    background:#6a4a23;
+}
+
+#chapters {
+    text-align:center;
+    margin: 12px 0;
+    position: relative;
+    z-index: 10;
+}
+
+/* PAGE LAYOUT + ANIMATION */
+.page {
+    position: absolute;
+    top: 105px;   /* below title + buttons */
+    left: 35px;
+    right: 35px;
+    bottom: 30px;
+    padding-right: 5px;
+    box-sizing: border-box;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    font-size:16px;      /* slightly smaller text */
+    line-height:1.35;    /* a bit tighter to fit more */
+    letter-spacing: 0.2px;
+
+    /* hidden state */
+    opacity: 0;
+    pointer-events: none;
+    transform-origin: left center;
+    transform: perspective(1000px) rotateY(-70deg);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    z-index: 1;
+}
+
+/* visible page */
+.page.active {
+    opacity: 1;
+    pointer-events: auto;
+    transform: perspective(1000px) rotateY(0deg);
+    z-index: 5;
+}
+
+/* subtle parchment shading */
+.page::before {
+    content:"";
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+    background: radial-gradient(circle at top left, rgba(255,255,255,0.22), transparent 60%),
+                radial-gradient(circle at bottom right, rgba(0,0,0,0.08), transparent 60%);
+    mix-blend-mode:multiply;
+}
+
+/* make sure text sits above the shading pseudo-element */
+.page > * {
+    position: relative;
+    z-index: 2;
+}
+</style>
+</head>
+
+<body>
+
+<div id="book">
+
+  <h1>The Wanderer's Journal</h1>
+  <h2>Pax Dei Roleplay Artifact</h2>
+
+  <div id="chapters">
+      <button onclick="show('foreword')">Foreword</button>
+      <button onclick="show('c1')">I</button>
+      <button onclick="show('c2')">II</button>
+      <button onclick="show('c3')">III</button>
+      <button onclick="show('c4')">IV</button>
+      <button onclick="show('c5')">V</button>
+      <button onclick="show('c6')">VI</button>
+      <button onclick="show('c7')">VII</button>
+      <button onclick="show('c8')">VIII</button>
+  </div>
+
+  <div id="foreword" class="page active">
+FOREWORD — A Warning to Any Who Unfold These Pages
+This record was not written in comfort, nor beneath any safe roof.
+It was written between footsteps and storms,
+between small fires that barely held back the dark,
+and between long silences where fear sat quietly beside me.
+It was written in the pauses between running,
+and in those moments where I sank to my knees—
+not in devotion,
+but because the world had pressed its truths so hard upon my shoulders
+that standing felt dishonest.
+If these words have found you, it likely means something has already changed within you.
+Perhaps you are someone who has willingly stepped away from shelter.
+Perhaps you had safety once, and fate pulled it out of your hands.
+Or perhaps you have begun to suspect safety was always a story people told
+so they could sleep at night.
+Do not carry these pages as scripture.
+Do not bow to them as instruction.
+Carry them instead as a handful of cooling embers,
+memory held carefully in cloth,
+the kind you press against your chest to remind yourself
+that even fading warmth is still warmth.
+The world is older than the Church.
+Older than Redeemers.
+Older than any miracle we have placed into words.
+It is even older than our ability to doubt it.
+And it is not finished yet.
+Whatever hand writes fate has not set down the quill.
+________________________________________
+  </div>
+
+
+  <div id="c1" class="page">
+CHAPTER I — Where Fire Still Burns: The Heartlands
+Let the wandering soul understand this first:
+Humanity does not survive because of triumphs and celebrations.
+It survives because it is stubborn enough not to vanish.
+In the Heartlands, fields still rise toward the sun,
+and grain still bows in quiet waves when the wind moves across it.
+Forges still strike and ring like iron-bound prayers.
+Children still laugh for no reason besides the joy of breathing.
+This region is not polished into glory.
+It has been carved into grit and determination.
+Here live farmers who refuse to kneel to darkness
+because there is bread that still needs to be made each morning.
+Here live craftsmen who strike heated metal,
+believing every blow of the hammer is an argument against despair.
+Here live women who bury their dead with trembling hands,
+and still return to plant flowers because beauty is an act of defiance.
+Priests live here too,
+and it is not uncommon to find them confessing their fears to strangers
+more honestly than those strangers confess to them.
+Yet be wary.
+For alongside them live opportunists
+whose kindness melts the moment it becomes inconvenient.
+Liars who speak softly of peace
+while weighing whether your life might buy them a quieter night.
+Neighbours who believe their comfort is worth more than your breath.
+This is no land of saints.
+It is a land of ordinary, bruised people.
+And there are days when that simple truth
+is far stronger than sainthood.
+________________________________________
+  </div>
+
+
+  <div id="c2" class="page">
+CHAPTER II — Cities of Stone and Voices of Iron
+In the great cities, faith must shout.
+It must echo through stone halls and thunderous bells,
+because fear lives there too—
+and it quiets only when drowned beneath louder noise.
+Monasteries record miracles the way merchants record coin.
+Cathedrals cradle relics the same way fortresses cradle weapons.
+And the Inquisition smiles with a politeness so sharp
+it could cut your throat without leaving a visible wound.
+There is power here.
+Order.
+A strange comfort in having meaning handed to you,
+already shaped and polished.
+But beneath that confidence lies panic.
+Beneath their piety lives politics.
+Beneath their devotion lurks obedience wearing devotion’s mask.
+And always, trials.
+Endless trials.
+Trials not held to uncover justice,
+but to demand that souls bend correctly.
+The Inquisition does not hate truth.
+They simply fear that if truth ever stands bare,
+it may not resemble the doctrine
+they have sworn never to doubt.
+________________________________________
+  </div>
+
+
+  <div id="c3" class="page">
+CHAPTER III — The People Who Do Not Shout Their Faith
+Few meet the Sethians unless they wish you to.
+They do not build grand temples.
+They do not raise banners or armies.
+They tend gardens.
+They remain quiet.
+They believe souls return.
+They believe knowledge is not treason against heaven.
+They believe fear is not the same thing as holiness.
+They walk softly.
+They unsettle those who need certainty to breathe.
+They comfort those who have forgotten how to feel safe.
+Once, one of them said to me:
+“Faith is believing the Divine does not require your defence.”
+I have carried those words with me like a stone in my pocket,
+feeling their weight but never quite knowing whether they anchor or free me.
+Perhaps they are saints.
+Perhaps they are heretics wrapped in gentleness.
+Perhaps they are both.
+Perhaps neither.
+Perhaps the words saint and heretic
+have finally worn thin from too much use.
+________________________________________
+  </div>
+
+
+  <div id="c4" class="page">
+CHAPTER IV — Where Heroes Fell and History Refuses to Sleep
+These lands are not haunted by ghosts.
+They are haunted by everything we once demanded of them.
+Pilgrims still kneel beside shattered statues,
+hoping cracked stone might still whisper meaning.
+Hands still rest upon rusted swords,
+as if courage might be absorbed through touch.
+Foreheads still press against ancient stones darkened by old blood,
+and the wind carries the same quiet question again and again:
+“Why was it not enough?”
+If you come seeking glory,
+the soil will teach you humility.
+If you come already broken,
+the wind will remind you that your wounds are not unique.
+Sometimes, that hurts more than haunting.
+Because it means we were the architects of this sorrow.
+________________________________________
+  </div>
+
+
+  <div id="c5" class="page">
+CHAPTER V — The Place Where the World Forgot to Heal
+The Ruined Belt is not evil.
+It is simply abandoned.
+And abandonment invites strange caretakers.
+Things live here—
+not quite beasts,
+not quite nightmares,
+something in between that refuses to fit our naming.
+Rules live here too.
+But they are not the rules we trust.
+They are old.
+They are cracked.
+They are unfinished.
+No Redeemer speaks here.
+No Church voice dares echo.
+Hope rarely lingers long.
+This land may be the most honest place I have seen.
+There are no comforting lies.
+No lofty promises.
+Only the stark truth of what happens
+when no hands remain willing
+to hold the sky in place.
+________________________________________
+  </div>
+
+
+  <div id="c6" class="page">
+CHAPTER VI — The Places That Breathe
+Magic did not belong in this world.
+Yet it came anyway.
+And in certain places the world grows thin,
+as if something presses its unseen face to the veil
+and peers through at us.
+You may feel warmth where the cold insists it should not exist.
+You may hear your own name whispered
+from the quiet center of your thoughts.
+You may witness the laws of existence soften
+and bend like metal fresh from the forge.
+Do not ask whether it is safe.
+It is not.
+Do not ask whether it is wicked.
+It is not.
+Magic is not moral.
+It is not a sermon.
+It does not care whether it comforts or destroys.
+It is simply truth without a temple.
+Many lose themselves not because magic lies—
+but because it refuses to lie at all.
+________________________________________
+  </div>
+
+
+  <div id="c7" class="page">
+CHAPTER VII — The Altars of Absence
+Shrines to Redeemers still stand.
+They are swept.
+They are tended.
+They are loved by hands that refuse to give up believing.
+No Redeemer has walked among us in a lifetime.
+No miracle has thundered across the sky.
+No voice has shattered silence.
+And still they kneel.
+Still they whisper.
+Still they hope.
+I am beginning to suspect the Redeemer
+may never have been meant to return.
+Perhaps the miracle was never supposed to be salvation.
+Perhaps the true miracle
+is the fragile, stubborn part of humanity
+that keeps waiting anyway.
+________________________________________
+  </div>
+
+
+  <div id="c8" class="page">
+CHAPTER VIII — Final Ink
+If you must choose a banner,
+choose humanity.
+If you must choose faith,
+choose the kind that does not blindfold you.
+If you must choose fear,
+choose the kind that keeps your hands steady
+rather than turning your heart cruel.
+And if you walk the road—
+Walk gently.
+The world is listening.
+  </div>
+
+</div>
+
+<script>
+function show(id){
+  const pages = document.querySelectorAll('.page');
+  pages.forEach(p => {
+    if (p.id === id) {
+      p.classList.add('active');
+    } else {
+      p.classList.remove('active');
+    }
+  });
+}
+</script>
+
+</body>
+</html>
